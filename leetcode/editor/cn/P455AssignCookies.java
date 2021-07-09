@@ -39,6 +39,9 @@
 // 👍 348 👎 0
 
 package editor.cn;
+
+import java.util.Arrays;
+
 //Java：分发饼干
 public class P455AssignCookies{
     public static void main(String[] args) {
@@ -48,7 +51,20 @@ public class P455AssignCookies{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int findContentChildren(int[] g, int[] s) {
-        return 0;
+        Arrays.sort(g);
+        Arrays.sort(s);
+        int sum = 0;
+        int now = 0;
+        for(int i=0;i<g.length;i++){
+            for(int j=now;j<s.length;j++){
+                if(g[i]<=s[j]){
+                    now = j+1;
+                    sum++;
+                    break;
+                }
+            }
+        }
+        return sum;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
