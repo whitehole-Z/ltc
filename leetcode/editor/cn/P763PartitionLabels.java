@@ -39,35 +39,56 @@ public class P763PartitionLabels{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public List<Integer> partitionLabels(String s) {
-        int[][] chars = new int[26][2];
-        for(int i=0;i<s.length();i++){
-            if(chars[s.charAt(i) - 'a'][0]==0 && s.charAt(i) != s.charAt(0)){
-                chars[s.charAt(i) - 'a'][0]=i;
-            }
-            chars[s.charAt(i) - 'a'][1] = i;
+        int[] chars = new int[26];
+        int length = s.length();
+        //26个字母最后出现位置
+        for(int i=0;i<length;i++){
+            chars[s.charAt(i) - 'a'] = i;
         }
 
         List<Integer> result = new ArrayList<>();
-        Arrays.sort(chars, new Comparator<int[]>() {
-            @Override
-            public int compare(int[] o1, int[] o2) {
-                return Integer.compare(o1[0],o2[0]);
-            }
-        });
-        int start = 0;
+        int start = -1;
         int end = 0;
-        for(int i=0;i<chars.length;i++){
-            if(chars[i][0]<=end){
-                end = Math.max(end,chars[i][1]);
-            }else{
-                result.add(end - start + 1);
-                start = chars[i][0];
-                end = chars[i][1];
+        for(int i=0;i<length;i++){
+            end = Math.max(chars[s.charAt(i) - 'a'],end);
+            if(i==end){
+                result.add(end - start);
+                start = i;
             }
         }
-        result.add(end-start+1);
+
         return result;
     }
+//    public List<Integer> partitionLabels(String s) {
+//        int[][] chars = new int[26][2];
+//        for(int i=0;i<s.length();i++){
+//            if(chars[s.charAt(i) - 'a'][0]==0 && s.charAt(i) != s.charAt(0)){
+//                chars[s.charAt(i) - 'a'][0]=i;
+//            }
+//            chars[s.charAt(i) - 'a'][1] = i;
+//        }
+//
+//        List<Integer> result = new ArrayList<>();
+//        Arrays.sort(chars, new Comparator<int[]>() {
+//            @Override
+//            public int compare(int[] o1, int[] o2) {
+//                return Integer.compare(o1[0],o2[0]);
+//            }
+//        });
+//        int start = 0;
+//        int end = 0;
+//        for(int i=0;i<chars.length;i++){
+//            if(chars[i][0]<=end){
+//                end = Math.max(end,chars[i][1]);
+//            }else{
+//                result.add(end - start + 1);
+//                start = chars[i][0];
+//                end = chars[i][1];
+//            }
+//        }
+//        result.add(end-start+1);
+//        return result;
+//    }
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
