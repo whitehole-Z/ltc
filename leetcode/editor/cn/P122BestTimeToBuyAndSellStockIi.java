@@ -52,7 +52,23 @@ public class P122BestTimeToBuyAndSellStockIi{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int maxProfit(int[] prices) {
-
+        boolean isHolding = false;
+        int sum = 0;
+        int buyPrice = 0;
+        for(int i=0;i<prices.length;i++){
+            if(!isHolding){
+                if(i<prices.length-1 && prices[i] < prices[i+1]){
+                    isHolding = true;
+                    buyPrice = prices[i];
+                }
+            }else{
+                if(i==prices.length-1 || prices[i+1]<prices[i]){
+                    isHolding = false;
+                    sum += prices[i] - buyPrice;
+                }
+            }
+        }
+        return sum;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
