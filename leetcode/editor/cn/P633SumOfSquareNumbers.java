@@ -52,7 +52,21 @@ public class P633SumOfSquareNumbers{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public boolean judgeSquareSum(int c) {
-
+        long a = 0,b = (long)Math.sqrt(c);
+        long sum = b*b;
+        while (a<=b){
+            while (sum<c){
+                a++;
+                sum = a*a + b*b;
+            }
+            if(sum == c){
+                return true;
+            }else{
+                b--;
+                sum = a*a + b*b;
+            }
+        }
+        return sum==c;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
