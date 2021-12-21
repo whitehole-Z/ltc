@@ -63,16 +63,19 @@ class Solution {
     public int findMin(int[] nums) {
         int l=0,r=nums.length-1,mid=0;
         while (l<r){
-            mid = l+(r-l)/2;
-            if(nums[mid] == nums[l]){
-                l++;
-            }else if(nums[mid] < nums[l]){
-                r=mid;
+            mid = l +(r-l)/2;
+            if(nums[mid] > nums[r]){
+                l=mid+1;
+            }else if(nums[mid] == nums[r]){
+                r--;
             }else{
-                r = mid-1;
+                r= mid;
+            }
+            if(r==l){
+                return nums[r];
             }
         }
-        return nums[mid];
+        return nums[l];
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
